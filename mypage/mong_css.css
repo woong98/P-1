@@ -1,0 +1,30 @@
+.banner 
+{
+    background-color: #2E64FE;
+    height : 50px;
+    display : flex;
+}
+.part0
+{
+    color : white;
+    flex-grow : 1;
+}
+.part1
+{
+    color : white;
+    flex-grow : 1;
+    text-align: center;
+}
+.part2
+{
+    color : white;
+    flex-grow : 1;
+    text-align: right;
+}
+/*배너에 대한 Style*/
+
+/*여기부터는 Javascript에서 자유게시판, 아니면 뭐 그런것들에 대해서 쓰일 형식임*/
+.free-board
+{
+    
+}
