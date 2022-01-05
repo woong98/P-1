@@ -1,7 +1,49 @@
+html
+{
+    height : 100%;
+}
+body
+{
+    height : 100%;
+    margin : 0;
+}
+
+.rect-button
+{
+    border-color : black;
+    border-style: solid;
+}
+.blank
+{
+    height : 5%;
+}
+
+.outer-board-name
+{
+    position : absolute;
+    top : 20%;
+    left : 10%;
+    width : 80%;
+    display : flex;
+    flex-direction: row;
+    height : 10%;
+}
+
+.inner-board-name
+{
+    font-weight: bold;
+    flex-grow : 1;
+    text-align: left;
+}
+
+.inner-board-name:nth-child(2)
+{
+    text-align: right;
+}
 .banner 
 {
     background-color: #2E64FE;
-    height : 50px;
+    height : 10%;
     display : flex;
 }
 .part0
@@ -11,12 +53,14 @@
 }
 .part1
 {
+    margin : 0.5%;
     color : white;
     flex-grow : 1;
     text-align: center;
 }
 .part2
 {
+    margin : 0.5%;
     color : white;
     flex-grow : 1;
     text-align: right;
@@ -24,7 +68,113 @@
 /*배너에 대한 Style*/
 
 /*여기부터는 Javascript에서 자유게시판, 아니면 뭐 그런것들에 대해서 쓰일 형식임*/
-.free-board
+.outer-board
 {
-    
+    width : 80%;
+    height : 50%;
+    display : flex;
+    flex-direction: column; 
+    border-color : #2E88FF;
+    border-style : solid;
+    border-collapse: collapse;
+    border-bottom-style : none;
+    border-right-style : none;
+    position : absolute;
+    left : 10%;
+    top : 25%;
+    /* 수직방향으로 FLEX를 통해서 정렬 가능하도록 함  */
 }
+
+.inner-board
+{
+    display : flex;
+    flex-direction: row;
+    flex-grow : 1;
+    border-color : #2E88FF;
+    border-style : solid;
+    border-collapse: collapse;
+    border-spacing : 0;
+    border-top-style : none;
+    border-left-style : none;
+    border-right-style : none;
+}
+
+.inner-text
+{
+    flex-grow : 1;
+    text-align : middle;
+    border-color : #2E88FF;
+    border-style : solid;
+    border-left-style : none;
+    border-bottom-style : none;
+    border-top-style : none;
+    border-right-style : solid;
+}
+
+.inner-text:nth-child(2)
+{
+    flex-grow : 6;
+}
+
+/* 각 게시판의 세부에 대한 내용임. 이를 통해서 각 게시판 내 세부를 구현할거임 */
+
+.outer-num
+{
+    width : 80%;
+    height : 4%;
+    display : flex;
+    flex-direction: row; 
+    border-color : #142e50;
+    justify-content: space-between;
+    position : absolute;
+    left : 10%;
+    top : 85%
+    /* 수평방향으로 FLEX를 통해서 정렬 가능하도록 함  */
+}
+
+.inner-num
+{
+    text-align : center;
+    border-color : #142e50;
+    border-style : solid;
+    width : 4%
+}
+
+/* 이 부분은 게시판 하부에 번호를 넘기는 부분에 대한 것  */
+
+.menu-back
+{
+    width : 30%;
+    height : 90%;
+    background-color : #9cbae0;
+    position : absolute;
+    top : 10%;
+    /* 수직 방향으로 FLEX를 통해서 정렬 가능하도록 함  */
+}
+
+.menu-show-out
+{
+    display : flex;
+    flex-direction: column; 
+    position : absolute;
+    top : 15%;
+    width : 15%;
+    left : 8%;
+    height : 40%;
+}
+
+.menu-show-in
+{
+    flex-grow : 1;
+    border-color : #0d2c55;
+    border-style : solid;
+    border-left-style : none;
+    border-top-style : none;
+    border-right-style : none;
+    border-bottom-style: solid;
+    text-align: center;
+    margin : 10%;
+}
+
+
+/* 여기는 메뉴를 눌렀을때 반응하는 부분  */
