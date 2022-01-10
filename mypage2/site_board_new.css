@@ -1,0 +1,49 @@
+.big-board{
+    position : absolute;
+    top : 20%;
+    left : 5%;
+    width : 90%;
+    display : flex;
+    flex-direction: column;
+    height : 80%;
+}
+
+.name-board{
+    display : flex;
+    flex-grow : 0.5;
+    border-bottom-color: #e4e4e4;
+    border-style : solid;
+    border-right-style :none;
+    border-top-style :none;
+    border-left-style :none;
+}
+
+.name-show{
+    text-align : left;
+    font-weight : bold;   
+}
+
+.name-show:nth-child(2)
+{
+    flex-grow : 8;
+    color : #ffffff;
+}
+
+.write-show{
+    text-align : right;
+    font-weight: bold;  
+}
+
+.main-board
+{
+    flex-grow : 9;
+    border-bottom-color: #e4e4e4;
+    border-style : solid;
+    border-right-style :none;
+    border-top-style :none;
+    border-left-style :none;
+}
+
+.num-board{
+    flex-grow : 1;
+}
