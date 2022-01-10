@@ -1,5 +1,6 @@
 let menuFlag = 0; //메뉴바에 대한 플래그 
 let pageFirstLoaded = 1; //처음 서버로부터 받아왔는가에 대한 플래그 
+const axios = require("axios").default;
 
 function createAndAdd(ele, clsname, pr, intext)
 {
@@ -72,6 +73,8 @@ function boards(boardName, adr)
     //게시판 상부 구현  
 
     createAndAdd("div", "main-board", tempBoard); //게시판 내부에 들어가야 할 내용 
+    let boardContent = axios.get(`/${adr}`);
+    console.log(boardContent);
 
     createAndAdd("div", "num-board", tempBoard); //게시판 하부 숫자 구성 
 

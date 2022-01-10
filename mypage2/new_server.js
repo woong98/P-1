@@ -2,18 +2,35 @@ const http = require("http");
 const url = require("url");
 const fs = require("fs");
 const { dir } = require("console");
-
 let mysql = require('mysql2');
+const express = require('express');
+const path = require('path');
 
 let con = mysql.createConnection(
-  {
-    host:"localhost",
-    user:"nodejs",
-    password: '545493',
-    port : "3306",
-    database : "mongsite"
-  }
-)
+    {
+      host:"localhost",
+      user:"nodejs",
+      password: '545493',
+      port : "3306",
+      database : "mongsite"
+    }
+  ); //데이터베이스 관련 connection 
+
+let app = express();
+app.use(express.static(__dirname));
+app.get('/', function(req, res)
+{
+    res.sendFile(path.join(__dirname, '/mong.html'));
+});
+
+app.listen(3000, function()
+{
+    console.log('example app listening');
+});
+
+
+/*
+
 
 var app = http.createServer(function(request,response){ //여기서의 function은 requestlistener로써 작용함
   
@@ -52,3 +69,5 @@ app.listen(3000, function() //listen 뒤의 function은 결국에 서버가 최�
     //이 function은 결국 이 listener가 added될때 호출되는 함수이므로 한 번만 호출되는거임 
     console.log("서버가 실행");
 });
+
+*/
