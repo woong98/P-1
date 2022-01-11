@@ -1,0 +1,22 @@
+@import "site_board_new.css";
+@import "site_banner.css";
+@import "menu_bar.css";
+html
+{
+    height : 100%;
+}
+body
+{
+    height : 100%;
+    margin : 0;
+}
+
+.rect-button
+{
+    border-color : black;
+    border-style: solid;
+}
+.blank
+{
+    height : 5%;
+}
