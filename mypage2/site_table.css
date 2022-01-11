@@ -1,0 +1,17 @@
+.out-table{
+    width : 100%; /*테이블을 div내에 꽉 차도록*/
+}
+
+.table-key{
+    border-bottom: 1px solid #ccc;
+    background-color: #ccc;
+}
+
+.table-row{
+}
+
+.table-element{
+    text-align: center;
+    border-bottom: 1px solid #ccc;
+}
+
