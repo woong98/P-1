@@ -1,6 +1,6 @@
 let menuFlag = 0; //메뉴바에 대한 플래그 
 let pageFirstLoaded = 1; //처음 서버로부터 받아왔는가에 대한 플래그 
-const axios = require("axios").default;
+//const axios = require("axios").default;
 
 function createAndAdd(ele, clsname, pr, intext)
 {
@@ -72,9 +72,38 @@ function boards(boardName, adr)
     createAndAdd("div", "write-show", nameBoard, "글쓰기"); 
     //게시판 상부 구현  
 
-    createAndAdd("div", "main-board", tempBoard); //게시판 내부에 들어가야 할 내용 
-    let boardContent = axios.get(`/${adr}`);
-    console.log(boardContent);
+    let mainBoard = createAndAdd("div", "main-board", tempBoard); //게시판 내부에 들어가야 할 내용 
+    
+    function getdbData(cb)
+    {
+        axios.get(`/${adr}`).then(function(response)
+        {
+                cb(response.data);
+        });
+    }
+
+    getdbData(function(a)
+    {
+        //이렇게 콜백함수를 사용하는 경우에는, a에 현재 DB의 데이터가 들어있는 것을 확인 가능하다 
+        let outtable =  createAndAdd("table", "out-table", mainBoard);
+        const keyNames = Object.keys(a[0]);
+        for(let i = 0; i < keyNames.length; i++)
+        {
+            createAndAdd("th", "table-key", outtable, keyNames[i]);
+        }
+        for(let i = 0; i < a.length; i++)
+        {
+            let tableRow = createAndAdd("tr", "table-row", outtable);
+            for(let j = 0; j < keyNames.length; j++)
+            {
+                createAndAdd("td", "table-element", tableRow, a[i][keyNames[j]]);
+            }      
+        }
+        //이 경우 innerText를 적용해야한다. innerText는 그거 data를 바탕으로 선정한다.
+        
+    });
+
+    
 
     createAndAdd("div", "num-board", tempBoard); //게시판 하부 숫자 구성 
 

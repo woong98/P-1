@@ -1,6 +1,8 @@
 @import "site_board_new.css";
 @import "site_banner.css";
 @import "menu_bar.css";
+@import "site_table.css";
+
 html
 {
     height : 100%;
