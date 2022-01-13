@@ -10,7 +10,7 @@
 
 .name-board{
     display : flex;
-    flex-grow : 0.5;
+    width : 100%;
     border-bottom-color: #e4e4e4;
     border-style : solid;
     border-right-style :none;
@@ -19,17 +19,15 @@
 }
 
 .name-show{
+    flex-grow: 1;
+    width : 35%;
     text-align : left;
     font-weight : bold;   
 }
 
-.name-show:nth-child(2)
-{
-    flex-grow : 8;
-    color : #ffffff;
-}
-
 .write-show{
+    flex-grow: 1;
+    width : 30%;
     text-align : right;
     font-weight: bold;  
 }

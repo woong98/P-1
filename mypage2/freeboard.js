@@ -117,10 +117,6 @@ function menuClickAction()
     }
 }
 
-function writeClickAction()
-{
-
-}
 
 const ajouClick = document.querySelector(".part1 p");
 ajouClick.addEventListener("click", freeboard);
