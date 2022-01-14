@@ -1,0 +1,28 @@
+.banner 
+{
+    background-color: #0065b3;
+    height : 10%;
+    display : flex;
+}
+.part0
+{
+    color : white;
+    flex-grow : 1;
+    font-weight : bold;
+}
+.part1
+{
+    margin : 0.5%;
+    color : white;
+    flex-grow : 1;
+    text-align: center;
+    font-weight : bold;
+}
+.part2
+{
+    margin : 0.5%;
+    color : white;
+    flex-grow : 1;
+    text-align: right;
+    font-weight : bold;
+}

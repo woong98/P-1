@@ -44,4 +44,11 @@
 
 .num-board{
     flex-grow : 1;
+    display : flex;
+    justify-content: center;
+}
+
+.num-board-ele{
+    text-align : center;
+    width: 5%;
 }

@@ -17,28 +17,28 @@ function createAndAdd(ele, clsname, pr, intext)
 
 function freeCliked()
 {
-    boards("자유게시판", "free");
-    history.pushState(null, null, '/free');
+    boards("자유게시판", "free", 1);
+    history.pushState(null, null, '/free/1');
 }
 function secretCliked()
 {
-    boards("비밀게시판", "secret");
-    history.pushState(null, null, '/secret');
+    boards("비밀게시판", "secret", 1);
+    history.pushState(null, null, '/secret/1');
 }
 function infoCliked()
 {
-    boards("정보게시판", "info");
-    history.pushState(null, null, '/info');
+    boards("정보게시판", "info", 1);
+    history.pushState(null, null, '/info/1');
 }
 function promCliked()
 {
-    boards("홍보게시판", "prom");
-    history.pushState(null, null, '/prom');
+    boards("홍보게시판", "prom", 1);
+    history.pushState(null, null, '/prom/1');
 }
 function swCliked()
 {
-    boards("SW게시판", "sw");
-    history.pushState(null, null, '/sw');
+    boards("SW게시판", "sw", 1);
+    history.pushState(null, null, '/sw/1');
 }
 
 
@@ -125,14 +125,31 @@ function createboard() //이 경우 처음으로 board를 생성하는 과정
             createAndAdd("td", "table-element", tableRow, " ");
         }      
     }
-    createAndAdd("div", "num-board", tempBoard); //게시판 하부 숫자 구성 
-
-    const title = '';
-    const blankBoard = document.querySelector(".big-board");
+    let numBoard = createAndAdd("div", "num-board", tempBoard); //게시판 하부 숫자 구성 
+    for(let i = 0; i < 10; i++)
+    {
+        createAndAdd("div", "num-board-ele", numBoard, " ");
+    }
 }
 
-function boards(boardName, adr)
+function boards(boardName, adr, pn)
 {
+    //테이블 내부 요소들을 기본값으로 변경하는 과정이 필요하다. 
+    let tableRow = document.querySelectorAll(".table-row");
+    for(let i = 0; i < tableRow.length; i++)
+    {
+        for(let j = 0; j < 5; j++)
+        {
+            tableRow[i].childNodes[j].innerText = " ";
+        }
+    }
+
+    let numEle = document.querySelectorAll(".num-board-ele");
+    for(let i = 0; i < numEle.length; i++)
+    {
+            numEle[i].innerText = " ";
+    }
+
     document.querySelector(".name-show").innerText = boardName;
     //게시판 이름을 변경 
     function getdbData(cb)
@@ -150,8 +167,10 @@ function boards(boardName, adr)
         {
             document.querySelectorAll(".table-key")[i].innerText = keyNames[i];
         }
-        let tableRow = document.querySelectorAll(".table-row")
-        for(let i = 0; i < 10; i++)
+        tableRow = document.querySelectorAll(".table-row");
+        
+
+        for(let i = 0 + 10*(pn - 1); i < 10 + 10*(pn - 1); i++)
         {
             if(i >= a.length)
                 break;
@@ -161,13 +180,24 @@ function boards(boardName, adr)
                 {
                     let tempStr = a[i][keyNames[j]];
                     let newStr = tempStr.split("T");
-                    tableRow[i].childNodes[j].innerText = newStr[0];
+                    tableRow[i - 10*(pn - 1)].childNodes[j].innerText = newStr[0];
                     continue;
                 }
-                tableRow[i].childNodes[j].innerText = a[i][keyNames[j]];
+                tableRow[i - 10*(pn - 1)].childNodes[j].innerText = a[i][keyNames[j]];
             }      
         }
         //이 경우 innerText를 적용해야한다. innerText는 그거 data를 바탕으로 선정한다.
+        let numOf = parseInt(a.length/10 + 1); //이것은 이제 적용해야할 번호수
+        numEle = document.querySelectorAll(".num-board-ele");
+        for(let i = 1; i < numOf + 1; i++)
+        {
+            numEle[i - 1].innerText = String(i);
+            numEle[i - 1].addEventListener("click", function()
+            {
+                history.pushState(null, null, `/${adr}/${i}`);
+                boards(boardName, adr, i);
+            });
+        }
     });
 }
 
@@ -175,31 +205,49 @@ window.onpopstate = function(event) { //뒤로가기 등 발생시 처리하는 
     //여기에 분기에 따른 결과를 넣어줘야 한다
     switch(location.pathname)
     {
-        case '/free' :
-            boards("자유게시판", "free");
+        case '/free/1' :
+            boards("자유게시판", "free", 1);
             break;
-        case '/secret' :
-            boards("비밀게시판", "secret");
+        case '/secret/1' :
+            boards("비밀게시판", "secret", 1);
             break;
-        case '/info' :
-            boards("정보게시판", "info");
+        case '/info/1' :
+            boards("정보게시판", "info", 1);
             break;
-        case '/prom' :
-            boards("홍보게시판", "prom");
+        case '/prom/1' :
+            boards("홍보게시판", "prom", 1);
             break;
-        case '/sw' :
-            boards("SW게시판", "sw");
+        case '/sw/1' :
+            boards("SW게시판", "sw", 1);
             break;
         default:
             break;
     }
   };
 
+function writeClickAction() //글쓰기 클릭 
+{
+    let tempBoard = document.querySelector(".big-board");
+    tempBoard.style.display = "none";
+}
+
+function ajouClickAction() //Ajou클릭 
+{   
+    let tempBoard = document.querySelector(".big-board");
+    tempBoard.style.display = "flex";
+    boards("자유게시판", "free", 1);
+    history.pushState(null, null, '/free/1');
+}
+
 createboard();
-boards("자유게시판", "free");
-history.pushState(null, null, '/free');
+boards("자유게시판", "free", 1);
+history.pushState(null, null, '/free/1');
 
 const menuClick = document.querySelector(".banner img");
 menuClick.addEventListener("click", menuClickAction); //메뉴 클릭에 대한 이벤트 리스너 
 
+const writeClick = document.querySelector(".write-show");
+writeClick.addEventListener("click", writeClickAction);
 
+const ajouClick = document.querySelector(".part1");
+ajouClick.addEventListener("click", ajouClickAction);
