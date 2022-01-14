@@ -1,13 +1,35 @@
 .out-table{
     width : 100%; /*테이블을 div내에 꽉 차도록*/
+    height : 100%;
+    table-layout: fixed;
 }
 
 .table-key{
+    height : 10%;
     border-bottom: 1px solid #ccc;
     background-color: #ccc;
+    width : 5%
+}
+.table-key:nth-child(2)
+{
+    width : 15%
+}
+.table-key:nth-child(3)
+{
+    width : 15%
+}
+.table-key:nth-child(4)
+{
+    width : 15%
+}
+.table-key:nth-child(5)
+{
+    width : 50%
 }
 
+
 .table-row{
+    height : 9%
 }
 
 .table-element{

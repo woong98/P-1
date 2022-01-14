@@ -14,52 +14,6 @@ function createAndAdd(ele, clsname, pr, intext)
     return a;
 }
 //ele라는 tag를 생성 후, clsname을 클래스로 설정한 다음에 pr의 자식으로 넣어주는 함수 
-function menuClickAction()
-{ 
-    //이 경우에 대해서는 좌측에 새로운 영역을 전개해서 메뉴 목록을 보여줘야한다. 
-    if(menuFlag === 0) //메뉴가 전개되어 있지 않은 경우 
-    {
-        menuFlag = 1;
-        createAndAdd("div", "menu-back", document.body); 
-        const menuBar = createAndAdd("div", "menu-show-out", document.body); 
-        
-        createAndAdd("div", "menu-show-in", menuBar, "자유게시판");
-        createAndAdd("div", "menu-show-in", menuBar, "비밀게시판");
-        createAndAdd("div", "menu-show-in", menuBar, "정보게시판");
-        createAndAdd("div", "menu-show-in", menuBar, "홍보게시판");
-        createAndAdd("div", "menu-show-in", menuBar, "SW게시판");
-    }
-    else if(menuFlag === 1)//메뉴가 전개되어 있는 경우 
-    {
-        menuFlag = 2;
-        let hidedMenuBack = document.querySelector(".menu-back");
-        console.log(hidedMenuBack);
-        hidedMenuBack.className = "menu-back-blocked";
-        hidedMenuBack = document.querySelector(".menu-show-out");
-        hidedMenuBack.className = "menu-show-blocked";
-        //메뉴바를 가리고 
-        let hidedMenus = document.querySelectorAll(".menu-show-in");
-        for(let i = 0; i < 5; i++)
-        {
-            hidedMenus[i].className = "menu-show-blocked2";
-        }
-    }
-    else //메뉴가 전개되어 있지 않지만, 이미 객체는 생성되어 있는 경우 
-    {
-        menuFlag = 1;
-        let hidedMenuBack = document.querySelector(".menu-back-blocked");
-        hidedMenuBack.className = "menu-back";
-        hidedMenuBack = document.querySelector(".menu-show-blocked");
-        hidedMenuBack.className = "menu-show-out";
-        //메뉴바를 가리고 
-        let hidedMenus = document.querySelectorAll(".menu-show-blocked2");
-        for(let i = 0; i < 5; i++)
-        {
-            hidedMenus[i].className = "menu-show-in";
-        }
-    }
-}
-
 
 function boards(boardName, adr)
 {
@@ -109,9 +63,88 @@ function boards(boardName, adr)
 
     const title = '';
     history.pushState("div", title, `/${adr}`);
+    console.log(history.state);
 }
+
+function freeCliked()
+{
+    boards("자유게시판", "free");
+}
+function secretCliked()
+{
+    boards("비밀게시판", "secret");
+}
+function infoCliked()
+{
+    boards("정보게시판", "info");
+}
+function promCliked()
+{
+    boards("홍보게시판", "prom");
+}
+function swCliked()
+{
+    boards("SW게시판", "sw");
+}
+
+
+function menuClickAction()
+{ 
+    //이 경우에 대해서는 좌측에 새로운 영역을 전개해서 메뉴 목록을 보여줘야한다. 
+    if(menuFlag === 0) //메뉴가 전개되어 있지 않은 경우 
+    {
+        menuFlag = 1;
+        createAndAdd("div", "menu-back", document.body); 
+        const menuBar = createAndAdd("div", "menu-show-out", document.body); 
+        
+        createAndAdd("div", "menu-show-in", menuBar, "자유게시판");
+        createAndAdd("div", "menu-show-in", menuBar, "비밀게시판");
+        createAndAdd("div", "menu-show-in", menuBar, "정보게시판");
+        createAndAdd("div", "menu-show-in", menuBar, "홍보게시판");
+        createAndAdd("div", "menu-show-in", menuBar, "SW게시판");
+    }
+    else if(menuFlag === 1)//메뉴가 전개되어 있는 경우 
+    {
+        menuFlag = 2;
+        let hidedMenuBack = document.querySelector(".menu-back");
+        hidedMenuBack.className = "menu-back-blocked";
+        hidedMenuBack = document.querySelector(".menu-show-out");
+        hidedMenuBack.className = "menu-show-blocked";
+        //메뉴바를 가리고 
+        let hidedMenus = document.querySelectorAll(".menu-show-in");
+        for(let i = 0; i < 5; i++)
+        {
+            hidedMenus[i].className = "menu-show-blocked2";
+        }
+    }
+    else //메뉴가 전개되어 있지 않지만, 이미 객체는 생성되어 있는 경우 
+    {
+        menuFlag = 1;
+        let hidedMenuBack = document.querySelector(".menu-back-blocked");
+        hidedMenuBack.className = "menu-back";
+        hidedMenuBack = document.querySelector(".menu-show-blocked");
+        hidedMenuBack.className = "menu-show-out";
+        //메뉴바를 가리고 
+        let hidedMenus = document.querySelectorAll(".menu-show-blocked2");
+        for(let i = 0; i < 5; i++)
+        {
+            hidedMenus[i].className = "menu-show-in";
+        }
+    }
     
+    if(menuFlag === 1)
+    { //이 경우에는 메뉴가 열려있는 시점임 
+        const freeClick = document.querySelectorAll(".menu-show-in");
+        freeClick[0].addEventListener("click", freeCliked);
+        freeClick[1].addEventListener("click", secretCliked);
+        freeClick[2].addEventListener("click", infoCliked);
+        freeClick[3].addEventListener("click", promCliked);
+        freeClick[4].addEventListener("click", swCliked);
+    }
+    
+}
+
 const menuClick = document.querySelector(".banner img");
 menuClick.addEventListener("click", menuClickAction); //메뉴 클릭에 대한 이벤트 리스너 
-
 boards("자유게시판", "free");
+
